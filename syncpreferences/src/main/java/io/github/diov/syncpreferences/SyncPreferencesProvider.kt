@@ -1,4 +1,4 @@
-package io.github.diov.syncpreferance
+package io.github.diov.syncpreferences
 
 import android.content.ContentProvider
 import android.content.ContentValues

@@ -1,4 +1,4 @@
-package io.github.diov.syncpreferance
+package io.github.diov.syncpreferences
 
 import android.content.ContentResolver
 import android.content.ContentValues
@@ -6,7 +6,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.database.ContentObserver
 import android.net.Uri
-import io.github.diov.syncpreferance.SyncPreferencesProvider.Companion.QUERY_RESULT
+import io.github.diov.syncpreferences.SyncPreferencesProvider.Companion.QUERY_RESULT
 
 /**
  * Created by Dio_V on 2019-05-24.

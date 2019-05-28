@@ -1,4 +1,4 @@
-package io.github.diov.syncpreferance
+package io.github.diov.syncpreferences
 
 import android.database.MatrixCursor
 import android.os.Bundle

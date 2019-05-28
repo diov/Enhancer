@@ -1,6 +1,5 @@
-package io.github.diov.syncpreferance
+package io.github.diov.syncpreferences
 
-import android.content.Context
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 

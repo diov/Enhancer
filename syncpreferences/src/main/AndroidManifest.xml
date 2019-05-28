@@ -1,9 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.diov.syncpreferance">
+    package="io.github.diov.syncpreferences">
 
     <application>
         <provider
-            android:name=".SyncPreferencesProvider"
+            android:name="io.github.diov.syncpreferences.SyncPreferencesProvider"
             android:authorities="${applicationId}.syncPreferencesProvider"
             android:exported="false" />
     </application>

@@ -1,6 +1,6 @@
 @file:Suppress("unused", "NOTHING_TO_INLINE")
 
-package io.github.diov.syncpreferance
+package io.github.diov.syncpreferences
 
 import android.content.Context
 import android.content.SharedPreferences

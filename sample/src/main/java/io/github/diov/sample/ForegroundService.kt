@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Handler
 import android.os.IBinder
 import androidx.core.os.postDelayed
-import io.github.diov.syncpreferance.getSyncPreferences
+import io.github.diov.syncpreferences.getSyncPreferences
 
 /**
  * Created by Dio_V on 2019-05-27.
