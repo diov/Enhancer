@@ -12,8 +12,8 @@ import kotlin.reflect.KProperty
  * Copyright © 2019 diov.github.io. All rights reserved.
  */
 
-fun Context.getSyncPreferences(): SharedPreferences {
-    return SyncPreferences.instance(this, "Default")
+fun Context.getSyncPreferences(name: String): SharedPreferences {
+    return SyncPreferences.instance(this, name)
 }
 
 private inline fun <T> SharedPreferences.delegate(
