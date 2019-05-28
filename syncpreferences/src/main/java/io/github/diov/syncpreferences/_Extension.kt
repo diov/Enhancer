@@ -13,7 +13,7 @@ import kotlin.reflect.KProperty
  */
 
 fun Context.getSyncPreferences(): SharedPreferences {
-    return SyncPreferences.instance(this)
+    return SyncPreferences.instance(this, "Default")
 }
 
 private inline fun <T> SharedPreferences.delegate(

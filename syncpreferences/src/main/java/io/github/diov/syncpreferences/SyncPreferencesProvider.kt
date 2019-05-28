@@ -9,6 +9,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import androidx.core.content.edit
+import java.util.WeakHashMap
 
 /**
  * Created by Dio_V on 2019-05-24.
@@ -17,13 +18,10 @@ import androidx.core.content.edit
 
 internal class SyncPreferencesProvider : ContentProvider() {
 
-    private var preferences: SharedPreferences? = null
+    private val preferencesMap: WeakHashMap<String, SharedPreferences> = WeakHashMap()
     private val uriMatcher = UriMatcher(UriMatcher.NO_MATCH)
 
     override fun onCreate(): Boolean {
-        val preferences =
-            context?.getSharedPreferences("SyncPreferencesProvider", Context.MODE_PRIVATE) ?: return false
-        this.preferences = preferences
         setupUriMatcher()
         return true
     }
@@ -49,8 +47,15 @@ internal class SyncPreferencesProvider : ContentProvider() {
         uriMatcher.addURI(authority, PATH_WILDCARD + CLEAR, CLEAR_CODE)
     }
 
+    private fun getPreferences(uri: Uri): SharedPreferences? {
+        val name = uri.pathSegments.firstOrNull() ?: "SyncPreferences"
+        return preferencesMap.getOrPut(name) {
+            context?.getSharedPreferences(name, Context.MODE_PRIVATE)
+        }
+    }
+
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
-        val editor = preferences?.edit() ?: return null
+        val editor = getPreferences(uri)?.edit() ?: return null
         val value = values?.valueSet()?.first() ?: error("Bad value")
         when (uriMatcher.match(uri)) {
             PUT_BOOLEAN_CODE -> editor.putBoolean(value.key, value.value as Boolean).apply()
@@ -70,7 +75,7 @@ internal class SyncPreferencesProvider : ContentProvider() {
         selectionArgs: Array<String>?,
         sortOrder: String?
     ): Cursor? {
-        val preferences = preferences ?: return null
+        val preferences = getPreferences(uri) ?: return null
         if (!preferences.contains(selection)) {
             return null
         }
@@ -99,7 +104,7 @@ internal class SyncPreferencesProvider : ContentProvider() {
     }
 
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
-        val preferences = preferences ?: return 0
+        val preferences = getPreferences(uri) ?: return 0
         when (uriMatcher.match(uri)) {
             REMOVE_CODE -> preferences.edit { remove(selection) }
             CLEAR_CODE -> preferences.edit { clear() }

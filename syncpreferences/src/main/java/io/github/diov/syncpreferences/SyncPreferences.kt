@@ -13,8 +13,8 @@ import io.github.diov.syncpreferences.SyncPreferencesProvider.Companion.QUERY_RE
  * Copyright © 2019 diov.github.io. All rights reserved.
  */
 
-internal class SyncPreferences private constructor(private val context: Context) : SharedPreferences,
-    SharedPreferences.Editor {
+internal class SyncPreferences private constructor(private val context: Context, private val name: String) :
+    SharedPreferences, SharedPreferences.Editor {
 
     private val contentResolver: ContentResolver = context.contentResolver
     private var contentObserver: ContentObserver? = null
@@ -130,7 +130,7 @@ internal class SyncPreferences private constructor(private val context: Context)
 
     override fun registerOnSharedPreferenceChangeListener(listener: SharedPreferences.OnSharedPreferenceChangeListener?) {
         val observer = this.contentObserver ?: SyncContentObserver(this).also {
-            val uri = Uri.parse("content://${context.packageName}.syncPreferencesProvider/*")
+            val uri = parseUri()
             contentResolver.registerContentObserver(uri, true, it)
             this.contentObserver = it
         }
@@ -211,14 +211,14 @@ internal class SyncPreferences private constructor(private val context: Context)
     override fun apply() = Unit
 
     private fun parseUri(path: String = ""): Uri {
-        return Uri.parse("content://${context.packageName}.syncPreferencesProvider/*/$path")
+        return Uri.parse("content://${context.packageName}.syncPreferencesProvider/$name/$path")
     }
 
     companion object {
         private var syncPreferences: SharedPreferences? = null
 
-        fun instance(context: Context): SharedPreferences {
-            return syncPreferences ?: SyncPreferences(context).also { syncPreferences = it }
+        fun instance(context: Context, name: String): SharedPreferences {
+            return syncPreferences ?: SyncPreferences(context, name).also { syncPreferences = it }
         }
     }
 }
