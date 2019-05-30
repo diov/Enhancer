@@ -19,7 +19,7 @@ class ForegroundService : Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        val syncPreferences = getSyncPreferences()
+        val syncPreferences = getSyncPreferences("default")
         syncPreferences.registerOnSharedPreferenceChangeListener { sp, key ->
             println("$key: ${sp.all[key]}")
             println("null: ${sp.getBoolean("null", false)}")

@@ -3,10 +3,10 @@ package io.github.diov.sample
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
+import io.github.diov.rxping.RxPing
 import io.github.diov.syncpreferences.getSyncPreferences
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupView() {
-        val syncPreferences = getSyncPreferences()
+        val syncPreferences = getSyncPreferences("default")
         saveButton.setOnClickListener {
             val intent = Intent(this, ForegroundService::class.java)
             ContextCompat.startForegroundService(this, intent)
@@ -30,8 +30,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         loadButton.setOnClickListener {
-            val hello = syncPreferences.getString("NIHAO", "nihao")
-            Toast.makeText(this, hello, Toast.LENGTH_LONG).show()
+            RxPing.ping("8.8.8.8", 10, 10).subscribe({
+                println(it.toList())
+            }, { it.printStackTrace() })
         }
     }
 }

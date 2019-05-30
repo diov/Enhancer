@@ -1,1 +1,1 @@
-include ':sample', ':syncpreferences'
+include ':app', ':syncpreferences', ':rxping'
