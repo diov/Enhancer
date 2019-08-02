@@ -35,8 +35,7 @@ object RxPing {
 
                 val bufferedReader = reader.buffered()
                 bufferedReader.forEachLine { line ->
-                    println(line)
-                    result.add(parseTime(line) ?: 0.toDouble())
+                    result.add(parseTime(line) ?: (-1).toDouble())
                 }
                 reader.close()
 

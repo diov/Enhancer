@@ -1,1 +1,1 @@
-include ':app', ':syncpreferences', ':rxping'
+include ':app', ':syncpreferences', ':rxping', 'xppreferences'

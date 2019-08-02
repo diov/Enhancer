@@ -1,10 +1,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.github.diov.syncpreferences">
+    package="io.github.diov.xppreferences">
 
     <application>
         <provider
-            android:name=".SyncPreferencesProvider"
-            android:authorities="${applicationId}.syncPreferencesProvider"
+            android:name=".XpPreferencesProvider"
+            android:authorities="${applicationId}.xpPreferencesProvider"
             android:exported="false" />
     </application>
 </manifest>
