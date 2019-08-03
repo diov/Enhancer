@@ -13,10 +13,10 @@ import io.github.diov.xppreferences.XpPreferencesProvider.Companion.QUERY_RESULT
  * Copyright © 2019 diov.github.io. All rights reserved.
  */
 
-internal class XpPreferences private constructor(
-    private val context: Context,
-    private val name: String,
-    private val packageName: String? = null
+class XpPreferences private constructor(
+    context: Context,
+    private val packageName: String,
+    private val name: String
 ) :
     SharedPreferences, SharedPreferences.Editor {
 
@@ -216,14 +216,14 @@ internal class XpPreferences private constructor(
     override fun apply() = Unit
 
     private fun parseUri(path: String = ""): Uri {
-        return Uri.parse("content://${packageName ?: context.packageName}.syncPreferencesProvider/$name/$path")
+        return Uri.parse("content://$packageName.xpPreferencesProvider/$name/$path")
     }
 
     companion object {
         private var syncPreferences: SharedPreferences? = null
 
-        fun instance(context: Context, name: String): SharedPreferences {
-            return syncPreferences ?: XpPreferences(context, name).also { syncPreferences = it }
+        fun instance(context: Context, packageName: String, name: String): SharedPreferences {
+            return syncPreferences ?: XpPreferences(context, packageName, name).also { syncPreferences = it }
         }
     }
 }

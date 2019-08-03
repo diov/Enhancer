@@ -5,6 +5,6 @@
         <provider
             android:name=".XpPreferencesProvider"
             android:authorities="${applicationId}.xpPreferencesProvider"
-            android:exported="false" />
+            android:exported="true" />
     </application>
 </manifest>

@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.postDelayed
 import io.github.diov.rxping.RxPing
-import io.github.diov.xppreferences.getSyncPreferences
+import io.github.diov.syncpreferences.getSyncPreferences
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
