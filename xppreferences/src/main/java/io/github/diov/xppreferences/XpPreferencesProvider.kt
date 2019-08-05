@@ -76,7 +76,7 @@ internal class XpPreferencesProvider : ContentProvider() {
         sortOrder: String?
     ): Cursor? {
         val preferences = getPreferences(uri) ?: return null
-        if (!preferences.contains(selection)) {
+        if (null != selection && !preferences.contains(selection)) {
             return null
         }
         val bundle = Bundle()

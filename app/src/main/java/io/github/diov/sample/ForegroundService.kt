@@ -2,9 +2,7 @@ package io.github.diov.sample
 
 import android.app.Service
 import android.content.Intent
-import android.os.Handler
 import android.os.IBinder
-import androidx.core.os.postDelayed
 import io.github.diov.syncpreferences.getSyncPreferences
 
 /**
@@ -24,9 +22,7 @@ class ForegroundService : Service() {
             println("$key: ${sp.all[key]}")
             println("null: ${sp.getBoolean("null", false)}")
         }
-        Handler().postDelayed(10000) {
-            println("timeout!")
-        }
+        println("${syncPreferences.all.count()}")
         return START_STICKY
     }
 }
